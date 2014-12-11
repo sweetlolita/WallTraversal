@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\Build\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CFlat.Bridge.Cfp">
+      <HintPath>..\..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Cfp.dll</HintPath>
+    </Reference>
     <Reference Include="CFlat.Utility">
       <HintPath>..\..\..\..\CFlat\Build\bin\Debug\CFlat.Utility.dll</HintPath>
     </Reference>
@@ -42,14 +45,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Intranet\CfpReceiveActivity.cs" />
-    <Compile Include="Internet\CfpSendActivity.cs" />
-    <Compile Include="CommonEntity\Register.cs" />
-    <Compile Include="CommonEntity\CfpRegisterActivity.cs" />
-    <Compile Include="Internet\CfpSendActivityObserver.cs" />
-    <Compile Include="Internet\SendString.cs" />
-    <Compile Include="CommonEntity\Traversal.cs" />
+    <Compile Include="CfpAcknowledgePlayer.cs" />
+    <Compile Include="CfpAcknowledgePlayground.cs" />
+    <Compile Include="CfpGprsReceiveDelegateReceivePlayer.cs" />
+    <Compile Include="CfpGprsReceiveDelegateReceivePlayground.cs" />
+    <Compile Include="CfpGprsSendDelegatePlayer.cs" />
+    <Compile Include="CfpGprsSendDelegatePlayground.cs" />
+    <Compile Include="CfpReceivePlayer.cs" />
+    <Compile Include="CfpReceivePlayground.cs" />
+    <Compile Include="CfpRegisterPlayer.cs" />
+    <Compile Include="CfpRegisterPlayground.cs" />
+    <Compile Include="CfpSendPlayer.cs" />
+    <Compile Include="CfpSendPlayground.cs" />
+    <Compile Include="Traversal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Gateway\Gprs\GprsTunnel\GprsTunnel.csproj">
+      <Project>{88946595-0b1e-4da5-a19f-6e9f497432bc}</Project>
+      <Name>GprsTunnel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cryption\Cryption.csproj">
+      <Project>{87969684-11ba-44ee-89c7-1de197236a61}</Project>
+      <Name>Cryption</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0258FA96-02B2-4E7E-8317-52AE7B141535}</ProjectGuid>
+    <ProjectGuid>{88946595-0B1E-4DA5-A19F-6E9F497432BC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WallTraversal.Framework.BusinessLayer.BusinessServer</RootNamespace>
-    <AssemblyName>WallTraversal.Framework.BusinessLayer.BusinessServer</AssemblyName>
+    <RootNamespace>WallTraversal.Gateway.Gprs.GprsTunnel</RootNamespace>
+    <AssemblyName>WallTraversal.Gateway.Gprs.GprsTunnel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,11 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CFlat.Bridge.Cfp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="CFlat.Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Cfp.dll</HintPath>
-    </Reference>
-    <Reference Include="CFlat.Utility">
       <HintPath>..\..\..\..\CFlat\Build\bin\Debug\CFlat.Utility.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -46,17 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CfpActivityServer.cs" />
-    <Compile Include="CfpActivityServerObserver.cs" />
+    <Compile Include="GprsSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Cryption\Cryption.csproj">
-      <Project>{87969684-11ba-44ee-89c7-1de197236a61}</Project>
-      <Name>Cryption</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

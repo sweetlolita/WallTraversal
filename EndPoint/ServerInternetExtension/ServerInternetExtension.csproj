@@ -4,24 +4,26 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0258FA96-02B2-4E7E-8317-52AE7B141535}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{2D5E19C5-FA93-4D82-8416-99A2FC9E5AA1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WallTraversal.Framework.BusinessLayer.BusinessServer</RootNamespace>
-    <AssemblyName>WallTraversal.Framework.BusinessLayer.BusinessServer</AssemblyName>
+    <RootNamespace>WallTraversal.EndPoint.ServerInternetExtension</RootNamespace>
+    <AssemblyName>WallTraversal.EndPoint.ServerInternetExtension</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Build\bin\Debug\</OutputPath>
+    <OutputPath>..\..\Build\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,12 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CFlat.Bridge.Cfp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Cfp.dll</HintPath>
+    <Reference Include="CFlat.Bridge.Cfp">
+      <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Cfp.dll</HintPath>
+    </Reference>
+    <Reference Include="CFlat.Bridge.Tcp">
+      <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Tcp.dll</HintPath>
     </Reference>
     <Reference Include="CFlat.Utility">
-      <HintPath>..\..\..\..\CFlat\Build\bin\Debug\CFlat.Utility.dll</HintPath>
+      <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Utility.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,17 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CfpActivityServer.cs" />
-    <Compile Include="CfpActivityServerObserver.cs" />
+    <Compile Include="GprsTransmitter.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cryption\Cryption.csproj">
-      <Project>{87969684-11ba-44ee-89c7-1de197236a61}</Project>
-      <Name>Cryption</Name>
+    <ProjectReference Include="..\..\Framework\BusinessLayer\BusinessServer\BusinessServer.csproj">
+      <Project>{0258fa96-02b2-4e7e-8317-52ae7b141535}</Project>
+      <Name>BusinessServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\BusinessLayer\CfpMessageExchange\CfpMessageExchange.csproj">
+      <Project>{7882b80f-72e8-4857-becc-4a5faecf7be7}</Project>
+      <Name>CfpMessageExchange</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Gateway\Gprs\GprsTunnel\GprsTunnel.csproj">
+      <Project>{88946595-0b1e-4da5-a19f-6e9f497432bc}</Project>
+      <Name>GprsTunnel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
