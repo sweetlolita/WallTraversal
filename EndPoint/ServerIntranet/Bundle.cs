@@ -7,6 +7,7 @@ using CFlat.Utility;
 using CFlat.Bridge.Cfp.Gutter;
 using WallTraversal.Framework.BusinessLayer.CfpMessageExchange;
 using WallTraversal.Framework.BusinessLayer.BusinessServer;
+using DPMP_COMM;
 
 namespace WallTraversal.EndPoint.ServerIntranet
 {
@@ -21,6 +22,11 @@ namespace WallTraversal.EndPoint.ServerIntranet
         private CfpGprsReceiveDelegateReceivePlayer cfpGprsReceiveDelegateReceivePlayer { get; set; }
         public Bundle(string ipAddress, int port)
         {
+            FuncLayer.onAppData = this.onAppData;
+            TerminalPool pool = new TerminalPool();
+            //pool.OnAppMsgReceived += AppMsgReceived;
+            pool.LoadTerminalList();
+
             cfpServer = new CfpServer(ipAddress, port, this);
             cfpActivityServer = new CfpActivityServer(this);
 
@@ -29,8 +35,8 @@ namespace WallTraversal.EndPoint.ServerIntranet
             cfpRegisterPlayer = new CfpRegisterPlayer(appGuidtoSessionGuidMap);
             cfpGprsReceiveDelegateReceivePlayer = new CfpGprsReceiveDelegateReceivePlayer(appGuidtoSessionGuidMap, cfpServer);
 
+
             cfpServer.registerActivity(CfpRegisterPlayground.verbRef, typeof(CfpRegisterPlayground), cfpRegisterPlayer);
-            cfpServer.registerActivity(CfpGprsReceiveDelegateReceivePlayground.verbRef, typeof(CfpGprsReceiveDelegateReceivePlayground), cfpGprsReceiveDelegateReceivePlayer);
         }
 
         public void start()
@@ -75,13 +81,34 @@ namespace WallTraversal.EndPoint.ServerIntranet
             Logger.error("CfpGutter: session {0} encountered an error {0}", sessionId, errorMessage);
         }
 
-        void CfpActivityServerObserver.onActivityComplete(Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
+        void CfpActivityServerObserver.onActivityComplete(string verb, Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
         {
-            CfpAcknowledgePlayground playground = new CfpAcknowledgePlayground();
-            playground.transactionId = transactionId;
-            playground.isSuccess = isSuccess;
-            playground.errorMessage = errorMessage;
-            cfpServer.send(sessionId, playground);
+            if (verb == CfpRegisterPlayground.verbRef)
+            {
+                CfpAcknowledgePlayground playground = new CfpAcknowledgePlayground();
+                playground.transactionId = transactionId;
+                playground.isSuccess = isSuccess;
+                playground.errorMessage = errorMessage;
+                cfpServer.send(sessionId, playground);
+            }
+        }
+
+        void onAppData(string jsonPayload)
+        {
+            Logger.debug("Bundle: activity gprsReceiveDelegate has come.");
+
+            Traversal traversal = Traversal.fromJson<Traversal>(jsonPayload);
+            CfpGprsReceiveDelegateReceivePlayground playground = new CfpGprsReceiveDelegateReceivePlayground();
+
+            playground.appGuid = traversal.appGuid;
+            playground.appData = traversal.appTraversal;
+
+            Activity receiveActivity = new Activity();
+            receiveActivity.playground = playground;
+            receiveActivity.player = cfpGprsReceiveDelegateReceivePlayer;
+
+            cfpActivityServer.postRequest(receiveActivity);
+            Logger.debug("Bundle: activity gprsReceiveDelegate has been post to generic server.");
         }
     }
 }

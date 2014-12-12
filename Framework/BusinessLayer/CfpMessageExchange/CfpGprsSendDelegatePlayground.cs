@@ -16,5 +16,7 @@ namespace WallTraversal.Framework.BusinessLayer.CfpMessageExchange
 
         public Guid appGuid { get; set; }
         public string appData { get; set; }
+
+
     }
 }

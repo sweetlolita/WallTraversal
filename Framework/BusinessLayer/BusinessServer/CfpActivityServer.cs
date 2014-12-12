@@ -41,7 +41,7 @@ namespace WallTraversal.Framework.BusinessLayer.BusinessServer
             {
                 if(genericActivityServerObserver != null)
                 {
-                    genericActivityServerObserver.onActivityComplete(sessionId, transactionId, isSuccess, errorMessage);
+                    genericActivityServerObserver.onActivityComplete(request.playground.verb, sessionId, transactionId, isSuccess, errorMessage);
                 }
             }
         }

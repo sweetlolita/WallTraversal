@@ -17,6 +17,7 @@ namespace WallTraversal.EndPoint.ClientInternet
             bundle.start();
             Guid guid = new Guid("CFF9B0CA-F2BA-4088-A326-702A6DF92B93");
             ConsoleKeyInfo ch;
+
             do
             {
                 ch = Console.ReadKey();

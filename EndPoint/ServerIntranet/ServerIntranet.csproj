@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Utility.dll</HintPath>
     </Reference>
+    <Reference Include="DPMP-COMM">
+      <HintPath>..\..\..\X2014007\DPMP-COMM\DPMP-COMM\bin\Debug\DPMP-COMM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,6 +69,9 @@
       <Project>{7882b80f-72e8-4857-becc-4a5faecf7be7}</Project>
       <Name>CfpMessageExchange</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,7 +13,7 @@ namespace WallTraversal.Framework.BusinessLayer.CfpMessageExchange
         public override void play(PlaygroundBase playgroundBase)
         {
             CfpReceivePlayground playground = playgroundBase as CfpReceivePlayground;
-            Logger.debug("CfpReceivePlayer: APP DATA: {1}", playground.appData);
+            Logger.debug("CfpReceivePlayer: APP DATA: {0}", playground.appData);
         }
     }
 }

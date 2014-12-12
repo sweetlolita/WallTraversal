@@ -19,7 +19,11 @@ namespace WallTraversal.Framework.BusinessLayer.CfpMessageExchange
         {
             CfpGprsSendDelegatePlayground delegatePlayground = playgroundBase as CfpGprsSendDelegatePlayground;
             Logger.debug("incoming gprs request: {0} | {1}", delegatePlayground.appGuid, delegatePlayground.appData);
-            gprsSenderRef.send(playgroundBase.toJson());
+            Traversal traversal = new Traversal();
+            traversal.appGuid = delegatePlayground.appGuid;
+            traversal.appTraversal = delegatePlayground.appData;
+            gprsSenderRef.send(traversal.toJson());
         }
     }
+
 }

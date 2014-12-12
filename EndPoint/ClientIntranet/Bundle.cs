@@ -71,5 +71,12 @@ namespace WallTraversal.EndPoint.ClientIntranet
             registerPlayground.transactionId = Guid.NewGuid();
             cfpClient.send(registerPlayground);
         }
+        public void send(string appData)
+        {
+            CfpSendPlayground sendPlayground = new CfpSendPlayground();
+            sendPlayground.appData = appData;
+            sendPlayground.transactionId = Guid.NewGuid();
+            cfpClient.send(sendPlayground);
+        }
     }
 }

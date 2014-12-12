@@ -30,13 +30,15 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
             cfpClient = new CfpClient(clientIpAddress, clientPort, serverIpAddress, serverPort, this);
             cfpActivityServer = new CfpActivityServer(this);
 
+            gprsSender = new GprsSender();
+
             cfpGrpsSendDelegatePlayer = new CfpGrpsSendDelegatePlayer(gprsSender);
             cfpAcknowledgePlayer = new CfpAcknowledgePlayer();
 
             cfpClient.registerActivity(CfpGprsSendDelegatePlayground.verbRef, typeof(CfpGprsSendDelegatePlayground), cfpGrpsSendDelegatePlayer);
             cfpClient.registerActivity(CfpAcknowledgePlayground.verbRef, typeof(CfpAcknowledgePlayground), cfpAcknowledgePlayer);
 
-            gprsSender = new GprsSender();
+            
         }
 
         public void start()
@@ -90,7 +92,7 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
             Logger.error("CfpGutter: session {0} encountered an error {0}", sessionId, errorMessage);
         }
 
-        void CfpActivityServerObserver.onActivityComplete(Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
+        void CfpActivityServerObserver.onActivityComplete(string verb, Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
         {
             //todo: send complete
             Logger.debug("GprsTransmitter: transaction {0} complete. result: {1} errorMessage : {2}",

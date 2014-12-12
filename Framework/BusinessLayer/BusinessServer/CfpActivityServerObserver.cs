@@ -7,6 +7,6 @@ namespace WallTraversal.Framework.BusinessLayer.BusinessServer
 {
     public interface CfpActivityServerObserver
     {
-        void onActivityComplete(Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage);
+        void onActivityComplete(string verb, Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage);
     }
 }

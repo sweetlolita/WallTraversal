@@ -75,13 +75,17 @@ namespace WallTraversal.EndPoint.ServerInternet
             Logger.error("CfpGutter: session {0} encountered an error {0}", sessionId, errorMessage);
         }
 
-        void CfpActivityServerObserver.onActivityComplete(Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
+        void CfpActivityServerObserver.onActivityComplete(string verb, Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
         {
-            CfpAcknowledgePlayground playground = new CfpAcknowledgePlayground();
-            playground.transactionId = transactionId;
-            playground.isSuccess = isSuccess;
-            playground.errorMessage = errorMessage;
-            cfpServer.send(sessionId, playground);
+            if (verb == CfpRegisterPlayground.verbRef || verb == CfpSendPlayground.verbRef)
+            {
+                CfpAcknowledgePlayground playground = new CfpAcknowledgePlayground();
+                playground.transactionId = transactionId;
+                playground.isSuccess = isSuccess;
+                playground.errorMessage = errorMessage;
+                cfpServer.send(sessionId, playground);
+            }
+
         }
     }
 }
