@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8DF9A5E9-4653-4EEB-A7DF-C76688334AB4}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WallTraversal.EndPoint.ClientInternet</RootNamespace>
     <AssemblyName>WallTraversal.EndPoint.ClientInternet</AssemblyName>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CFlat.Bridge.Cfp">
       <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Cfp.dll</HintPath>
@@ -51,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bundle.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

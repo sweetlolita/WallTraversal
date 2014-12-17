@@ -11,7 +11,7 @@ namespace WallTraversal.EndPoint.ServerIntranet
         static void Main(string[] args)
         {
             Logger.enable();
-            Bundle bundle = new Bundle("10.148.219.165", 8334);
+            Bundle bundle = new Bundle();
             bundle.start();
 
             ConsoleKeyInfo ch;

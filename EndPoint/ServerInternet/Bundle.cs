@@ -19,8 +19,11 @@ namespace WallTraversal.EndPoint.ServerInternet
 
         private CfpRegisterPlayer cfpRegisterPlayer { get; set; }
         private CfpSendPlayer cfpSendPlayer { get; set; }
-        public Bundle(string ipAddress, int port)
+        public Bundle()
         {
+            string ipAddress = ConfigParser.getValueFromCFlatConfig("ServerInternetIpAddress");
+            string portString = ConfigParser.getValueFromCFlatConfig("ServerInternetPort");
+            int port = Convert.ToInt32(portString);
             cfpServer = new CfpServer(ipAddress, port, this);
             cfpActivityServer = new CfpActivityServer(this);
 

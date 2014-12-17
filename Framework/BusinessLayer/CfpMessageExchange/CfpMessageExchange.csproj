@@ -52,6 +52,7 @@
     <Compile Include="CfpGprsSendDelegatePlayer.cs" />
     <Compile Include="CfpGprsSendDelegatePlayground.cs" />
     <Compile Include="CfpReceivePlayer.cs" />
+    <Compile Include="CfpReceivePlayerObserver.cs" />
     <Compile Include="CfpReceivePlayground.cs" />
     <Compile Include="CfpRegisterPlayer.cs" />
     <Compile Include="CfpRegisterPlayground.cs" />

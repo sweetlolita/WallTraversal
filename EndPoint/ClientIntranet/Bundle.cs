@@ -9,17 +9,21 @@ using WallTraversal.Framework.BusinessLayer.CfpMessageExchange;
 
 namespace WallTraversal.EndPoint.ClientIntranet
 {
-    class Bundle : CfpGutterObserver
+    public class Bundle : CfpGutterObserver , CfpReceivePlayerObserver
     {
+        private WallTraversalClientIntranetObserver wallTraversalClientIntranetObserver { get; set; }
         private CfpClient cfpClient { get; set; }
         private CfpAcknowledgePlayer cfpAcknowledgePlayer { get; set; }
         private CfpReceivePlayer cfpReceivePlayer { get; set; }
-        public Bundle(string clientIpAddress, int clientPort, string serverIpAddress, int serverPort)
+        public Bundle(string clientIpAddress, int clientPort, string serverIpAddress, int serverPort,
+            WallTraversalClientIntranetObserver wallTraversalClientIntranetObserver)
         {
+            this.wallTraversalClientIntranetObserver = wallTraversalClientIntranetObserver;
+
             cfpClient = new CfpClient(clientIpAddress, clientPort, serverIpAddress, serverPort, this);
 
             cfpAcknowledgePlayer = new CfpAcknowledgePlayer();
-            cfpReceivePlayer = new CfpReceivePlayer();
+            cfpReceivePlayer = new CfpReceivePlayer(this);
 
             cfpClient.registerActivity(CfpAcknowledgePlayground.verbRef, typeof(CfpAcknowledgePlayground), cfpAcknowledgePlayer);
             cfpClient.registerActivity(CfpReceivePlayground.verbRef, typeof(CfpReceivePlayground), cfpReceivePlayer);
@@ -71,12 +75,13 @@ namespace WallTraversal.EndPoint.ClientIntranet
             registerPlayground.transactionId = Guid.NewGuid();
             cfpClient.send(registerPlayground);
         }
-        public void send(string appData)
+
+        void CfpReceivePlayerObserver.onAppData(string appData)
         {
-            CfpSendPlayground sendPlayground = new CfpSendPlayground();
-            sendPlayground.appData = appData;
-            sendPlayground.transactionId = Guid.NewGuid();
-            cfpClient.send(sendPlayground);
+            if(wallTraversalClientIntranetObserver != null)
+            {
+                wallTraversalClientIntranetObserver.onAppData(appData);
+            }
         }
     }
 }

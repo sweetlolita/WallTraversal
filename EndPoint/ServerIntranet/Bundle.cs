@@ -20,8 +20,11 @@ namespace WallTraversal.EndPoint.ServerIntranet
 
         private CfpRegisterPlayer cfpRegisterPlayer { get; set; }
         private CfpGprsReceiveDelegateReceivePlayer cfpGprsReceiveDelegateReceivePlayer { get; set; }
-        public Bundle(string ipAddress, int port)
+        public Bundle()
         {
+            string ipAddress = ConfigParser.getValueFromCFlatConfig("ServerIntranetIpAddress");
+            string portString = ConfigParser.getValueFromCFlatConfig("ServerIntranetPort");
+            int port = Convert.ToInt32(portString);
             FuncLayer.onAppData = this.onAppData;
             TerminalPool pool = new TerminalPool();
             //pool.OnAppMsgReceived += AppMsgReceived;

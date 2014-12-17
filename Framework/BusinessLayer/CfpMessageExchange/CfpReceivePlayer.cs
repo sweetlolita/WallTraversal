@@ -9,11 +9,19 @@ namespace WallTraversal.Framework.BusinessLayer.CfpMessageExchange
 {
     public class CfpReceivePlayer : CfpPlayer
     {
-
+        private CfpReceivePlayerObserver cfpReceivePlayerObserver { get; set; }
+        public CfpReceivePlayer(CfpReceivePlayerObserver cfpReceivePlayerObserver)
+        {
+            this.cfpReceivePlayerObserver = cfpReceivePlayerObserver;
+        }
         public override void play(PlaygroundBase playgroundBase)
         {
             CfpReceivePlayground playground = playgroundBase as CfpReceivePlayground;
-            Logger.debug("CfpReceivePlayer: APP DATA: {0}", playground.appData);
+            Logger.debug("CfpReceivePlayer: on app data: {0}", playground.appData);
+            if(cfpReceivePlayerObserver != null)
+            {
+                cfpReceivePlayerObserver.onAppData(playground.appData);
+            }
         }
     }
 }

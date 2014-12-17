@@ -11,9 +11,7 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
         static void Main(string[] args)
         {
             Logger.enable();
-            GprsTransmitter bundle = new GprsTransmitter(
-                "10.31.31.31", 8332,
-                "10.31.31.31", 8334);
+            GprsTransmitter bundle = new GprsTransmitter();
             bundle.start();
             ConsoleKeyInfo ch;
             do

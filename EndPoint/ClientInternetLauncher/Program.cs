@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CFlat.Utility;
+using WallTraversal.EndPoint.ClientInternet;
 
-namespace WallTraversal.EndPoint.ClientIntranet
+namespace WallTraversal.EndPoint.ClientInternet.Launcher
 {
     class Program
     {
@@ -12,8 +13,8 @@ namespace WallTraversal.EndPoint.ClientIntranet
         {
             Logger.enable();
             Bundle bundle = new Bundle(
-                "10.148.219.165", 8333,
-                "10.148.219.165", 8334);
+                "10.31.31.31", 0,
+                "10.0.0.2", 8334);
             bundle.start();
             Guid guid = new Guid("CFF9B0CA-F2BA-4088-A326-702A6DF92B93");
             ConsoleKeyInfo ch;

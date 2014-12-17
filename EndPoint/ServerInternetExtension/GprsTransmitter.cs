@@ -25,8 +25,16 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
         private CfpAcknowledgePlayer cfpAcknowledgePlayer { get; set; }
 
         private GprsSender gprsSender { get; set; }
-        public GprsTransmitter(string clientIpAddress, int clientPort, string serverIpAddress, int serverPort)
+        public GprsTransmitter()
         {
+            string serverIpAddress = ConfigParser.getValueFromCFlatConfig("ServerInternetIpAddress");
+            string serverPortString = ConfigParser.getValueFromCFlatConfig("ServerInternetPort");
+            int serverPort = Convert.ToInt32(serverPortString);
+
+            string clientIpAddress = ConfigParser.getValueFromCFlatConfig("GprsTransmitterIpaddress");
+            string clientPortString = ConfigParser.getValueFromCFlatConfig("GprsTransmitterPort");
+            int clientPort = Convert.ToInt32(clientPortString);
+
             cfpClient = new CfpClient(clientIpAddress, clientPort, serverIpAddress, serverPort, this);
             cfpActivityServer = new CfpActivityServer(this);
 

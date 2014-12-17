@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GprsTunnel", "Gateway\Gprs\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miscellaneous", "Miscellaneous\Miscellaneous.csproj", "{DA99FA0F-8DAC-437E-A274-A68FD4E81B87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientInternetLauncher", "EndPoint\ClientInternetLauncher\ClientInternetLauncher.csproj", "{69377505-84FF-4FEE-9D32-476E3A869DCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientIntranetLauncher", "EndPoint\ClientIntranetLauncher\ClientIntranetLauncher.csproj", "{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,14 @@ Global
 		{DA99FA0F-8DAC-437E-A274-A68FD4E81B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA99FA0F-8DAC-437E-A274-A68FD4E81B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA99FA0F-8DAC-437E-A274-A68FD4E81B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69377505-84FF-4FEE-9D32-476E3A869DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69377505-84FF-4FEE-9D32-476E3A869DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69377505-84FF-4FEE-9D32-476E3A869DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69377505-84FF-4FEE-9D32-476E3A869DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,5 +107,7 @@ Global
 		{02E2F609-5998-46EC-A1DA-FA83B4E720B8} = {DD0A86AB-83EC-4C91-A6EC-F466C188E4E8}
 		{DD261DA6-898B-4502-A2E2-DEDD31DBAE5C} = {1B8D68EB-673C-4892-9323-7D22A73826A3}
 		{88946595-0B1E-4DA5-A19F-6E9F497432BC} = {DD261DA6-898B-4502-A2E2-DEDD31DBAE5C}
+		{69377505-84FF-4FEE-9D32-476E3A869DCB} = {DD0A86AB-83EC-4C91-A6EC-F466C188E4E8}
+		{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7} = {DD0A86AB-83EC-4C91-A6EC-F466C188E4E8}
 	EndGlobalSection
 EndGlobal

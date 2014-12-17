@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D5E19C5-FA93-4D82-8416-99A2FC9E5AA1}</ProjectGuid>
+    <ProjectGuid>{EF5408BA-658C-4BCD-AAC4-1D8F362DEED7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WallTraversal.EndPoint.ServerInternetExtension</RootNamespace>
-    <AssemblyName>WallTraversal.EndPoint.ServerInternetExtension</AssemblyName>
+    <RootNamespace>WallTraversal.EndPoint.ClientIntranet.Launcher</RootNamespace>
+    <AssemblyName>WallTraversal.EndPoint.ClientIntranet.Launcher</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GprsTransmitter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

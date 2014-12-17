@@ -47,15 +47,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CFlat.Bridge.Cfp">
-      <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Cfp.dll</HintPath>
-    </Reference>
-    <Reference Include="CFlat.Bridge.Tcp">
-      <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Bridge.Tcp.dll</HintPath>
-    </Reference>
-    <Reference Include="CFlat.Utility">
-      <HintPath>..\..\..\CFlat\Build\bin\Debug\CFlat.Utility.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,21 +54,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WallTraversal.all, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Build\bin\Debug\WallTraversal.all.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bundle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\BusinessLayer\BusinessServer\BusinessServer.csproj">
-      <Project>{0258fa96-02b2-4e7e-8317-52ae7b141535}</Project>
-      <Name>BusinessServer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\BusinessLayer\CfpMessageExchange\CfpMessageExchange.csproj">
-      <Project>{7882b80f-72e8-4857-becc-4a5faecf7be7}</Project>
-      <Name>CfpMessageExchange</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

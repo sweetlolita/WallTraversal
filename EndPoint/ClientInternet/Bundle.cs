@@ -10,7 +10,7 @@ using WallTraversal.Framework.BusinessLayer.CfpMessageExchange;
 
 namespace WallTraversal.EndPoint.ClientInternet
 {
-    class Bundle : CfpGutterObserver
+    public class Bundle : CfpGutterObserver
     {
         private CfpClient cfpClient { get; set; }
         private CfpAcknowledgePlayer cfpAcknowledgePlayer { get; set; }
