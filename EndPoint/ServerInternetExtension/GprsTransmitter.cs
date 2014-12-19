@@ -11,7 +11,7 @@ using WallTraversal.Gateway.Gprs.GprsTunnel;
 
 namespace WallTraversal.EndPoint.ServerInternetExtension
 {
-    class GprsTransmitter : CfpGutterObserver, CfpActivityServerObserver
+    class GprsTransmitter : CfpGutterObserver, CfpActivityServerObserver, CfpAcknowledgePlayerObserver
     {
         private readonly Guid extensionGuid = Guid.Parse("6638A58E-5190-4407-AB0C-ED3AA5213097");
 
@@ -25,6 +25,8 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
         private CfpAcknowledgePlayer cfpAcknowledgePlayer { get; set; }
 
         private GprsSender gprsSender { get; set; }
+
+        private Guid registerTransactionGuid { get; set; }
         public GprsTransmitter()
         {
             string serverIpAddress = ConfigParser.getValueFromCFlatConfig("ServerInternetIpAddress");
@@ -41,7 +43,7 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
             gprsSender = new GprsSender();
 
             cfpGrpsSendDelegatePlayer = new CfpGrpsSendDelegatePlayer(gprsSender);
-            cfpAcknowledgePlayer = new CfpAcknowledgePlayer();
+            cfpAcknowledgePlayer = new CfpAcknowledgePlayer(this);
 
             cfpClient.registerActivity(CfpGprsSendDelegatePlayground.verbRef, typeof(CfpGprsSendDelegatePlayground), cfpGrpsSendDelegatePlayer);
             cfpClient.registerActivity(CfpAcknowledgePlayground.verbRef, typeof(CfpAcknowledgePlayground), cfpAcknowledgePlayer);
@@ -88,6 +90,7 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
         void CfpGutterObserver.onCfpConnected(Guid sessionId)
         {
             Logger.debug("Bundle: session {0} connected.", sessionId);
+            this.registerTransactionGuid = register();
         }
 
         void CfpGutterObserver.onCfpDisconnected(Guid sessionId)
@@ -97,7 +100,7 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
 
         void CfpGutterObserver.onCfpError(Guid sessionId, string errorMessage)
         {
-            Logger.error("CfpGutter: session {0} encountered an error {0}", sessionId, errorMessage);
+            Logger.error("Bundle: session {0} encountered an error {1}", sessionId, errorMessage);
         }
 
         void CfpActivityServerObserver.onActivityComplete(string verb, Guid sessionId, Guid transactionId, bool isSuccess, string errorMessage)
@@ -107,12 +110,23 @@ namespace WallTraversal.EndPoint.ServerInternetExtension
                 transactionId, isSuccess, errorMessage);
         }
 
-        public void register()
+        public Guid register()
         {
             CfpRegisterPlayground registerPlayground = new CfpRegisterPlayground();
             registerPlayground.appGuid = extensionGuid;
             registerPlayground.transactionId = Guid.NewGuid();
             cfpClient.send(registerPlayground);
+            return registerPlayground.transactionId;
+
+        }
+
+        void CfpAcknowledgePlayerObserver.onAcknowledge(Guid transactionGuid, bool isSuccess, string errorMessage)
+        {
+            if (transactionGuid == this.registerTransactionGuid &&
+                isSuccess == true)
+            {
+                Logger.info("GprsTransmitter: get to go.");
+            }
         }
     }
 }

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CfpAcknowledgePlayer.cs" />
+    <Compile Include="CfpAcknowledgePlayerObserver.cs" />
     <Compile Include="CfpAcknowledgePlayground.cs" />
     <Compile Include="CfpGprsReceiveDelegateReceivePlayer.cs" />
     <Compile Include="CfpGprsReceiveDelegateReceivePlayground.cs" />

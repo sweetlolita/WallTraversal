@@ -10,16 +10,25 @@ using WallTraversal.Framework.BusinessLayer.CfpMessageExchange;
 
 namespace WallTraversal.EndPoint.ClientInternet
 {
-    public class Bundle : CfpGutterObserver
+    public class Bundle : CfpGutterObserver , CfpAcknowledgePlayerObserver
     {
+        private WallTraversalClientInternetObserver wallTraversalClientInternetObserver { get; set; }
+        private Guid appGuid { get; set; }
         private CfpClient cfpClient { get; set; }
         private CfpAcknowledgePlayer cfpAcknowledgePlayer { get; set; }
 
-        public Bundle(string clientIpAddress, int clientPort, string serverIpAddress, int serverPort)
+        private Guid registerTransactionGuid { get; set; }
+
+        public Bundle(Guid appGuid,
+            string clientIpAddress, int clientPort, string serverIpAddress, int serverPort,
+            WallTraversalClientInternetObserver wallTraversalClientInternetObserver)
         {
+            this.appGuid = appGuid;
+            this.wallTraversalClientInternetObserver = wallTraversalClientInternetObserver;
+
             cfpClient = new CfpClient(clientIpAddress, clientPort, serverIpAddress, serverPort, this);
 
-            cfpAcknowledgePlayer = new CfpAcknowledgePlayer();
+            cfpAcknowledgePlayer = new CfpAcknowledgePlayer(this);
 
             cfpClient.registerActivity(CfpAcknowledgePlayground.verbRef, typeof(CfpAcknowledgePlayground), cfpAcknowledgePlayer);
         }
@@ -51,6 +60,7 @@ namespace WallTraversal.EndPoint.ClientInternet
         void CfpGutterObserver.onCfpConnected(Guid sessionId)
         {
             Logger.debug("Bundle: session {0} connected.", sessionId);
+            this.registerTransactionGuid = register(appGuid);
         }
 
         void CfpGutterObserver.onCfpDisconnected(Guid sessionId)
@@ -60,15 +70,16 @@ namespace WallTraversal.EndPoint.ClientInternet
 
         void CfpGutterObserver.onCfpError(Guid sessionId, string errorMessage)
         {
-            Logger.error("CfpGutter: session {0} encountered an error {0}", sessionId, errorMessage);
+            Logger.error("Bundle: session {0} encountered an error: {1}", sessionId, errorMessage);
         }
 
-        public void register(Guid appGuid)
+        public Guid register(Guid appGuid)
         {
             CfpRegisterPlayground registerPlayground = new CfpRegisterPlayground();
             registerPlayground.appGuid = appGuid;
             registerPlayground.transactionId = Guid.NewGuid();
             cfpClient.send(registerPlayground);
+            return registerPlayground.transactionId;
         }
 
         public void send(string appData)
@@ -79,5 +90,14 @@ namespace WallTraversal.EndPoint.ClientInternet
             cfpClient.send(sendPlayground);
         }
 
+        void CfpAcknowledgePlayerObserver.onAcknowledge(Guid transactionGuid, bool isSuccess, string errorMessage)
+        {
+            if (wallTraversalClientInternetObserver != null &&
+                 transactionGuid == this.registerTransactionGuid &&
+                 isSuccess == true)
+            {
+                wallTraversalClientInternetObserver.onStarted();
+            }
+        }
     }
 }

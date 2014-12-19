@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WallTraversal.EndPoint.ClientIntranet
+namespace WallTraversal.EndPoint.ClientInternet
 {
-    public interface WallTraversalClientIntranetObserver
+    public interface WallTraversalClientInternetObserver
     {
-        void onAppData(string appData);
-
         void onStarted();
 
         void onStopped();

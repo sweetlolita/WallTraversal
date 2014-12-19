@@ -13,11 +13,11 @@ namespace WallTraversal.EndPoint.ClientIntranet.Launcher
         {
             Logger.enable();
             Bundle bundle = new Bundle(
+                new Guid("CFF9B0CA-F2BA-4088-A326-702A6DF92B93"),
                 "10.148.219.165", 0,
                 "10.148.219.165", 8334,
                 new Program());
             bundle.start();
-            Guid guid = new Guid("CFF9B0CA-F2BA-4088-A326-702A6DF92B93");
             ConsoleKeyInfo ch;
 
             do
@@ -25,11 +25,11 @@ namespace WallTraversal.EndPoint.ClientIntranet.Launcher
                 ch = Console.ReadKey();
                 switch (ch.Key)
                 {
-                    case ConsoleKey.R:
-                        {
-                            bundle.register(guid);
-                            break;
-                        }
+                    //case ConsoleKey.R:
+                    //    {
+                    //        bundle.register(guid);
+                    //        break;
+                    //    }
                     case ConsoleKey.C:
                         {
                             bundle.start();
@@ -47,9 +47,19 @@ namespace WallTraversal.EndPoint.ClientIntranet.Launcher
             bundle.stop();
         }
 
-        public void onAppData(string appData)
+        void WallTraversalClientIntranetObserver.onAppData(string appData)
         {
             Logger.debug("Program: on app data: {0}", appData);
+        }
+
+        void WallTraversalClientIntranetObserver.onStarted()
+        {
+            
+        }
+
+        void WallTraversalClientIntranetObserver.onStopped()
+        {
+            
         }
     }
 }
